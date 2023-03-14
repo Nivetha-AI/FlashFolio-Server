@@ -26,9 +26,10 @@ app.use('/user', userRoutes)
 
 app.use(express.static(path.join(__dirname,'./client/build')))
 
-app.get("*", (req,res)=>(
-  res.sendFile(path.join(__dirname,'./client/build/index.html'))
-))
+app.get("*", (req,res)=>{
+  res.setHeader("Access-Control-Allow-Credentials","true");
+  res.sendFile(path.join(__dirname,'./client/build/index.html'));
+})
 const PORT = process.env.PORT|| 5000;
 
 mongoose.connect(process.env.CONNECTION_URL, { useNewUrlParser: true, useUnifiedTopology: true })
